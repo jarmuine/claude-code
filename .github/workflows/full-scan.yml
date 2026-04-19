@@ -1,0 +1,22 @@
+name: AI Full Scan
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  full-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: slatinwine/newma-review-action@v0.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ai-api-key: ${{ secrets.ZHIPU_API_KEY }}
+          ai-model: glm-4.7-flash
+          mode: full
+          language: zh
+          max-files: '20'
