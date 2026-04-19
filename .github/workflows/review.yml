@@ -1,0 +1,21 @@
+name: AI Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: slatinwine/newma-review-action@v0.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ai-api-key: ${{ secrets.ZHIPU_API_KEY }}
+          ai-model: glm-4.7-flash
+          language: zh
